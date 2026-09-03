@@ -1,0 +1,6 @@
+# Sistema monetario en el que el algoritmo voraz NO es optimo
+# Ejemplo: para el monto 15 el algoritmo voraz entrega 10+1+1+1+1+1 (6 monedas)
+# mientras que una solucion optima es 7+7+1 (3 monedas)
+1
+7
+10

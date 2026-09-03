@@ -1,0 +1,5 @@
+# Sistema monetario sin la denominacion 1. Muchos montos no se pueden pagar
+# Util para probar el metodo largestNonPayable de la clase CoinChangeCounter
+6
+9
+20

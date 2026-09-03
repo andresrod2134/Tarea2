@@ -1,0 +1,12 @@
+# Montos pequenos para probar el algoritmo Naive (recursion pura)
+# Con estos montos el numero de llamados recursivos ya crece de manera notoria
+5
+10
+14
+18
+22
+26
+28
+30
+32
+34
