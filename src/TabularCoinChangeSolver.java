@@ -28,14 +28,69 @@ public class TabularCoinChangeSolver implements CoinChangeSolver {
 
 	@Override
 	public int minCoins(int amount) {
-		//TODO: Implementar llenando las tablas de manera ascendente. Las posiciones que ya
-		//fueron calculadas en llamados anteriores no se deben volver a calcular
-		return -1;
+		ensureCapacity(amount);
+		return minCoinsTable[amount];
 	}
 
 	@Override
 	public List<Integer> change(int amount) {
-		//TODO: Implementar recorriendo la tabla lastCoin desde el monto hasta llegar a cero
-		return null;
+		ensureCapacity(amount);
+
+		if (minCoinsTable[amount] == -1) {
+			return null;
+		}
+
+		//Se reconstruye la solucion usando unicamente lastCoin sin resolver nada de nuevo
+		List<Integer> result = new ArrayList<>();
+		int remaining = amount;
+		while (remaining > 0) {
+			int coin = lastCoin[remaining];
+			result.add(coin);
+			remaining -= coin;
+		}
+
+		return result;
+	}
+
+	/**
+	 * Agranda las tablas si hace falta, conservando lo que ya se habia calculado, y
+	 * calcula unicamente las posiciones nuevas de manera ascendente
+	 */
+	private void ensureCapacity(int amount) {
+		int oldLength = minCoinsTable.length;
+		if (amount < oldLength) {
+			return;
+		}
+
+		int newLength = amount + 1;
+		int [] newMinCoins = new int[newLength];
+		int [] newLastCoin = new int[newLength];
+		System.arraycopy(minCoinsTable, 0, newMinCoins, 0, oldLength);
+		System.arraycopy(lastCoin, 0, newLastCoin, 0, oldLength);
+		minCoinsTable = newMinCoins;
+		lastCoin = newLastCoin;
+
+		int start = oldLength;
+		if (start == 0) {
+			minCoinsTable[0] = 0;
+			lastCoin[0] = -1;
+			start = 1;
+		}
+
+		for (int m = start; m < newLength; m++) {
+			int best = -1;
+			int bestCoin = -1;
+			for (int d : coins) {
+				if (d <= m && minCoinsTable[m - d] != -1) {
+					int candidate = minCoinsTable[m - d] + 1;
+					if (best == -1 || candidate < best) {
+						best = candidate;
+						bestCoin = d;
+					}
+				}
+			}
+			minCoinsTable[m] = best;
+			lastCoin[m] = bestCoin;
+		}
 	}
 }
