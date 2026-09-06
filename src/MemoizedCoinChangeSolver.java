@@ -35,7 +35,7 @@ public class MemoizedCoinChangeSolver implements CoinChangeSolver {
 
 	@Override
 	public List<Integer> change(int amount) {
-		//Nos aseguramos de que el subproblema ya este resuelto.
+		
 		int total = minCoins(amount);
 
 		if (total == -1) {
@@ -79,7 +79,7 @@ public class MemoizedCoinChangeSolver implements CoinChangeSolver {
 
 	/**
 	 * Resuelve recursivamente C(m), guardando cada respuesta en memory para no
-	 * volver a calcularla si se necesita de nuevo
+	 * volver a calcularla si se necesita de nuevo. 
 	 */
 	private int solve(int m) {
 		if (m == 0) {

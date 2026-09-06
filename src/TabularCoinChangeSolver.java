@@ -40,7 +40,7 @@ public class TabularCoinChangeSolver implements CoinChangeSolver {
 			return null;
 		}
 
-		//Se reconstruye la solucion usando unicamente lastCoin sin resolver nada de nuevo
+		
 		List<Integer> result = new ArrayList<>();
 		int remaining = amount;
 		while (remaining > 0) {
